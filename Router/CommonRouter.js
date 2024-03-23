@@ -4,6 +4,6 @@ const Router = express.Router();
 const { PostSignup } = require('../Controller/CommonController');
 
 
-Router.post("/Postsignup", PostSignup);
+Router.post("/register", PostSignup);
 
 module.exports = Router;

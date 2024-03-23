@@ -15,7 +15,7 @@ app.use(cors());
 const CommonRouter = require('./Router/CommonRouter');
 
 
-app.use('/', CommonRouter);
+app.use('/api/user', CommonRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
