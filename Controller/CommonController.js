@@ -56,6 +56,31 @@ const object = {
       console.error(error);
     }
   },
+  login:async(req,res)=>{
+    try {
+        const {email} = req.body;
+        const check = await UserSchema.findOne({email});
+        const payload = req.body;
+  
+        const expires = 3 * 24 * 60 * 60;
+        const token = jwt.sign({payload},
+            process.env.SECRET_KEY, {expiresIn: expires},
+        );
+  
+        const passwordMatch = await bcrypt.compare(
+            req.body.password,
+            check.password,
+        );
+        if (passwordMatch) {
+          res.status(200).json({message: 'login successful', token});
+        } else {
+          res.status(401).json({message: 'login invaild '});
+        }
+      } catch (error) {
+        console.error('login error', error);
+        res.status(500).json({message: 'login error'});
+      }
+  }
 };
 
 module.exports = object;
