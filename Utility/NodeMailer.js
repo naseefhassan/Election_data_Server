@@ -1,7 +1,7 @@
 
 const nodemailer = require('nodemailer');
 
-const sendMail = async (toEmail, resetLink) => {
+const sendMail = async (toEmail, name) => {
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -15,7 +15,7 @@ const sendMail = async (toEmail, resetLink) => {
       from: process.env.USER_EMAIL,
       to: toEmail,
       subject: 'Reset Your password',
-      text: resetLink,
+      text: ` <html> Welcome to home ${name}</html> Otp Verification`,
     };
 
     await transporter.sendMail(mailOptions);
